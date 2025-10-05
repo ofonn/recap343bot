@@ -9,14 +9,16 @@ if not TOKEN:
 
 # --- Welcome Message Function ---
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # Main formatted text (like the screenshot)
+    chat = update.effective_chat  # safer reference for consistent message sending
+
+    # --- Main formatted text (like the screenshot) ---
     message_text = (
         "➡️ Code : https://link-center.net/1227837/how-to-unlock-full-access5\n\n"
         "➡️ Mega : https://mega.nz/folder/xNBjxAQR\n\n"
         "Share the group 3 times to unlock all the special content 🤫"
     )
 
-    # Inline buttons (second section)
+    # --- Inline buttons section ---
     unlock_keyboard = [
         [InlineKeyboardButton("Group To Unlock 🔒", url="https://t.me/share/url?url=https://t.me/recap343bot")],
         [InlineKeyboardButton("Free Extracts 😋", url="https://t.me/recap343bot")],
@@ -24,22 +26,22 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
     unlock_markup = InlineKeyboardMarkup(unlock_keyboard)
 
-    # Send main message (links + instruction)
-    await update.message.reply_text(
-        message_text,
+    # --- Send main message block ---
+    await chat.send_message(
+        text=message_text,
         disable_web_page_preview=True
     )
 
-    # Send the 3 inline buttons below
-    await update.message.reply_text(
-        " ",
+    # --- Send buttons below ---
+    await chat.send_message(
+        text=" ",
         reply_markup=unlock_markup,
         disable_web_page_preview=True
     )
 
-    # Send plain “Main Menu” text
-    await update.message.reply_text(
-        "🔝 Main Menu",
+    # --- Send plain “Main Menu” text ---
+    await chat.send_message(
+        text="🔝 Main Menu",
         disable_web_page_preview=True
     )
 
